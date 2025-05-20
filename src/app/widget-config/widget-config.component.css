@@ -1,0 +1,87 @@
+.widget-config {
+    background-color:  #34495e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 200px;
+    margin: 20px auto;
+  }
+  
+  .widget-config-title {
+    font-size: 1.5rem;
+    color: #efeded;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .widget-config-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  label {
+    font-size: 1rem;
+    color: #f8f4f4;
+  }
+  
+  select {
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    background-color: #fafafa;
+  }
+  
+  select:focus {
+    border-color: #1976d2;
+  }
+  
+  .widget-config-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+  }
+  
+  button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .apply-btn {
+    background-color: #1976d2;
+    color: white;
+    border: none;
+  }
+  
+  .apply-btn:disabled {
+    background-color: #ccc;
+  }
+  
+  .apply-btn:hover:not(:disabled) {
+    background-color: #1565c0;
+  }
+  
+  .clear-btn {
+    background-color: #e3f2fd;
+    border: 1px solid #1976d2;
+    color: #1976d2;
+  }
+  
+  .clear-btn:hover {
+    background-color: #bbdefb;
+  }
+  
+
+  

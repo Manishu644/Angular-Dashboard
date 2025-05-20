@@ -1,0 +1,84 @@
+<div class="traffic-dashboard">
+  <h1 class="title">🚦 Traffic Data</h1>
+
+  <!-- Top Controls: Filters & Config -->
+  <div class="controls">
+    <!-- <button class="toggle-filter-button" (click)="showFilter = !showFilter"> ⚙️Filter Data</button> -->
+    
+    <button class="toggle-config-button" (click)="showConfig = !showConfig">
+      ⚙️ Configure Widget
+    </button>
+    <!-- <app-data-filter *ngIf="showFilter" (filterChange)="onfilterchange($event)"></app-data-filter> -->
+    <div class="widgets">
+    <app-widget-config
+      *ngIf="showConfig"
+      [config]="config"
+      [defaultConfig]="{ chartType: 'line', dataRange: 'Last 30 Days' }"
+      (configChange)="onWidgetConfigChange($event)">
+    </app-widget-config>
+    </div>
+  </div>
+
+  <!-- Chart Header -->
+  <div class="chart-header">
+    <h3 *ngIf="chartLevel === 'region'">Traffic by Region</h3>
+    <h3 *ngIf="chartLevel === 'date'">Drill-down: {{ selectedRegion }}</h3>
+    <button *ngIf="chartLevel === 'date'" (click)="goBack()" class="back-button">⬅ Back</button>
+  </div>
+
+  <!-- Chart Display -->
+  <div class="chart-section">
+    <div class="chart-container">
+      <canvas baseChart
+        *ngIf="chartData"
+        [data]="chartData"
+        [options]="chartOptions"
+        [type]="currentChartType">
+      </canvas>
+    </div>
+  </div>
+
+  <div class="toggle-section card">
+  <label>
+    <input type="checkbox" [(ngModel)]="showFilteredData" />
+    <strong>Show Filtered Sales Data</strong>
+  </label>
+</div>
+
+
+  <div class="toggle-section card">
+  <label>
+    <input type="checkbox" [(ngModel)]="showDetailedData" />
+    <strong>Show Drill-down Sales Data</strong>
+  </label>
+</div>
+
+  <!-- Data Lists -->
+  <div class="details" >
+    <!-- Filtered List -->
+    <div class="traffic-list" *ngIf="showFilteredData">
+      <h4>📋 Filtered Traffic Data</h4>
+      <ul *ngIf="traffic.length > 0">
+        <li *ngFor="let item of traffic | filterbydateandRegion:selectedRegion:selectedDate">
+          🌍 <strong>Region:</strong> {{ item.region }} |
+          📅 <strong>Date:</strong> {{ item.date }} |
+          🚗 <strong>Traffic:</strong> {{ item.traffic }}
+        </li>
+      </ul>
+    </div>
+
+    <!-- Drill-down Details -->
+     <div *ngIf="showDetailedData" >
+    <div *ngIf="detailedData.length > 0" class="drilldown-details">
+      <h4>🔍 Detailed Traffic Records for {{ selectedRegion }}</h4>
+      <ul>
+        <li *ngFor="let item of detailedData">
+          🌍 <strong>Region:</strong> {{ item.region }} |
+          📅 <strong>Date:</strong> {{ item.date }} |
+          🚗 <strong>Traffic:</strong> {{ item.traffic }}
+        </li>
+      </ul>
+      </div>
+    </div>
+  </div>
+</div>

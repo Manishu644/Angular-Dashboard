@@ -1,0 +1,81 @@
+<div class="sales-dashboard">
+  <h1 class="title">📈 Sales Data</h1>
+
+  <!-- Top Controls Section -->
+  <div class="controls">
+    <!-- <button class="toggle-filter-button" (click)="showFilter = !showFilter"> ⚙️Filter Data</button> -->
+    
+    <button class="toggle-config-button" (click)="showConfig = !showConfig">
+      ⚙️ Configure Widget
+    </button>
+    <div class="widgets">
+    <!-- <app-data-filter *ngIf="showFilter" (filterChange)="onfilterchange($event)"></app-data-filter> -->
+    <app-widget-config
+      *ngIf="showConfig"
+      [config]="config"
+      [defaultConfig]="{ chartType: 'bar', dataRange: 'Last 30 Days' }"
+      (configChange)="onWidgetConfigChange($event)">
+    </app-widget-config>
+    </div>
+  </div>
+
+  <!-- Chart Header -->
+  <div class="chart-header">
+    <h3 *ngIf="chartLevel === 'region'">Sales by Region</h3>
+    <h3 *ngIf="chartLevel === 'date'">Drill-down: {{ selectedRegion }}</h3>
+    <button *ngIf="chartLevel === 'date'" (click)="goBack()" class="back-button">⬅ Back</button>
+  </div>
+
+  <!-- Chart Section -->
+  <div class="chart-section">
+    <div class="chart-container">
+      <canvas baseChart
+        *ngIf="chartData"
+        [data]="chartData"
+        [options]="chartOptions"
+        [type]="currentChartType">
+      </canvas>
+    </div>
+  </div>
+ 
+  <div class="toggle-section card">
+  <label>
+    <input type="checkbox" [(ngModel)]="showFilteredData" />
+    <strong>Show Filtered Sales Data</strong>
+  </label>
+</div>
+<div class="toggle-section card">
+  <label>
+    <input type="checkbox" [(ngModel)]="showDetailedData" />
+    <strong>Show Drill-down sales data</strong>
+  </label>
+</div>
+
+
+  <!-- Data Display -->
+  <div class="data-sections" >
+    <div class="sales-list" *ngIf="showFilteredData">
+      <h4>🧾 Filtered Sales Data</h4>
+      <ul *ngIf="sales.length > 0">
+        <li *ngFor="let item of sales | filterbydateandRegion:selectedRegion:selectedDate">
+          📍 <strong>Region:</strong> {{ item.region }} |
+          💰 <strong>Amount:</strong> {{ item.amount }} |
+          📅 <strong>Date:</strong> {{ item.date }}
+        </li>
+      </ul>
+    </div>
+    
+    <div  *ngIf="showDetailedData">
+    <div *ngIf="detailedData.length > 0" class="drilldown-details">
+      
+      <h4>🔍 Detailed Sales Records for {{ selectedRegion }}</h4>
+      <ul>
+        <li *ngFor="let item of detailedData">
+          💰 <strong>Amount:</strong> {{ item.amount }} |
+          📅 <strong>Date:</strong> {{ item.date }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  </div>
+</div>

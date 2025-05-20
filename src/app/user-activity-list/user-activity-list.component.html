@@ -1,0 +1,84 @@
+<div class="user-activity-dashboard">
+  <h1 class="title">🧑‍💻 User Activity Data</h1>
+
+  <!-- Top Controls Section -->
+  <div class="controls">
+    <!-- <button class="toggle-filter-button" (click)="showFilter = !showFilter"> ⚙️Filter Data</button> -->
+    
+    <button class="toggle-config-button" (click)="showConfig = !showConfig">
+      ⚙️ Configure Widget
+    </button>
+    <!-- <app-data-filter *ngIf="showFilter" (filterChange)="onfilterchange($event)"></app-data-filter> -->
+    <div class="widgets">
+    <app-widget-config
+      *ngIf="showConfig"
+      [config]="config"
+      [defaultConfig]="{ chartType: 'pie', dataRange: 'Last 30 Days' }"
+      (configChange)="onWidgetConfigChange($event)">
+    </app-widget-config>
+    </div>
+  </div>
+
+  <!-- Chart Header -->
+  <div class="chart-header">
+    <h3 *ngIf="chartLevel === 'region'">Sales by Region</h3>
+    <h3 *ngIf="chartLevel === 'date'">Drill-down: {{ selectedRegion }}</h3>
+    <button *ngIf="chartLevel === 'date'" (click)="goBack()" class="back-button">⬅ Back</button>
+  </div>
+
+  <!-- Chart Section -->
+  <div class="chart-section">
+    <div class="chart-container">
+      <canvas baseChart
+        *ngIf="chartData"
+        [data]="chartData"
+        [options]="chartOptions"
+        [type]="currentChartType">
+      </canvas>
+    </div>
+  </div>
+
+  <div class="toggle-section card">
+  <label>
+    <input type="checkbox" [(ngModel)]="showFilteredData" />
+  <strong>Show Filtered Sales Data</strong>
+  </label>
+</div>
+
+<div class="toggle-section card">
+  <label>
+    <input type="checkbox" [(ngModel)]="showDetailedData" />
+  <strong>Show Drill-down Sales Data</strong>
+  </label>
+</div>
+
+  <!-- Data Display -->
+  <div class="data-sections" >
+    <div class="user-activity-list" *ngIf="showFilteredData">
+      <h4>📋 Filtered User Activities</h4>
+      <ul *ngIf="activities.length > 0">
+        <li *ngFor="let item of activities | filterbydateandRegion:selectedRegion:selectedDate">
+          🆔 <strong>User ID:</strong> {{ item.userId }} |
+          🌍 <strong>Region:</strong> {{ item.region }} |
+          📅 <strong>Date:</strong> {{ item.date }} |
+          💬 <strong>Activity:</strong> {{ item.activity }} |
+          ⏱ <strong>Duration:</strong> {{ item.duration }} min
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="showDetailedData">
+    <div *ngIf="detailedData.length > 0" class="drilldown-details">
+      <h4>🔍 Detailed Records for {{ selectedRegion }}</h4>
+      <ul>
+        <li *ngFor="let item of detailedData">
+          🆔 <strong>User:</strong> {{ item.userId }} |
+          💬 <strong>Activity:</strong> {{ item.activity }} |
+          ⏱ <strong>Duration:</strong> {{ item.duration }} mins |
+          📅 <strong>Date:</strong> {{ item.date }}
+        </li>
+      </ul>
+      </div>
+    </div>
+  </div>
+</div>

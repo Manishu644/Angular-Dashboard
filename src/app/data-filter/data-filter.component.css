@@ -1,0 +1,94 @@
+.filter-container {
+    background-color:  #394b5e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: auto;
+    max-width: 250px;
+    margin: 20px auto;
+  }
+  
+  .filter-title {
+    font-size: 1.5rem;
+    color: #f3f1f1;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .filter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  label {
+    font-size: 1rem;
+    color: #f5f4f4;
+  }
+  
+  input[type="text"],
+  input[type="date"] {
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    background-color: #fafafa;
+  }
+  
+  input[type="text"]:focus,
+  input[type="date"]:focus {
+    border-color: #1976d2;
+  }
+  
+  .filter-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+  }
+  
+  button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .apply-filter-btn {
+    background-color: #1976d2;
+    color: white;
+    border: none;
+  }
+  
+  .apply-filter-btn:disabled {
+    background-color: #ccc;
+  }
+  
+  .apply-filter-btn:hover:not(:disabled) {
+    background-color: #1565c0;
+  }
+  
+  .clear-filter-btn {
+    background-color: #e3f2fd;
+    border: 1px solid #1976d2;
+    color: #1976d2;
+  }
+  
+  .clear-filter-btn:hover {
+    background-color: #bbdefb;
+  }
+  
+  @media (max-width: 600px) {
+    .filter-container {
+      width: 90%;
+      padding: 15px;
+    }
+  }
+  

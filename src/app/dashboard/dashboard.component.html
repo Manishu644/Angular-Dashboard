@@ -1,0 +1,75 @@
+<div class="admin-dashboard">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2 class="logo">📊 Dashboard</h2>
+    <nav class="nav-menu">
+      <!-- <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a> -->
+      <button *ngIf="isWidgetVisible('sales') " class="toggle-filter-button" (click)="toggleWidgetVisibility('sales')">👁️ Sales</button>
+      <button *ngIf="isWidgetVisible('useractivity')"   class="toggle-filter-button" (click)="toggleWidgetVisibility('useractivity')">👁️ User Activity</button>
+      <button *ngIf="isWidgetVisible('traffic')"   class="toggle-filter-button" (click)="toggleWidgetVisibility('traffic')">👁️ Traffic</button>
+      <button class="toggle-filter-button" (click)="showFilter = !showFilter"> ⚙️Filter Data</button>
+     
+    </nav>
+  </aside>
+
+  <!-- Main Layout -->
+  <div class="main-content">
+    <!-- Top Header -->
+    <header class="top-header">
+      <div class="welcome-text">
+        <h3>Welcome back, <strong>{{ currentUser.toUpperCase() }}</strong> 👋</h3>
+      </div>
+      <div class="user-selector">
+        <label for="user-select"><strong>👤 User: </strong></label>
+        <select id="user-select" (change)="onUserChange($event)">
+          <option value="admin">Admin</option>
+          <option value="guest">Guest</option>
+          <option value="analyst">Analyst</option>
+        </select>
+      </div>
+    </header>
+
+    <!-- Widgets Grid -->
+    <section class="widget-grid">
+     
+      <div
+        cdkDropList
+        cdkDropListOrientation="horizontal"
+        [cdkDropListData]="widgets"
+        (cdkDropListDropped)="onDrop($event)"
+        class="grid-container"
+      >
+        <ng-container *ngFor="let widget of widgets">
+      <ng-container *ngIf="isWidgetVisible(widget.title.toLowerCase())">
+          <div
+            cdkDrag
+            class="grid-item"
+            
+          >
+          <div class="widget">
+            <div class="widget-header">
+              <h4>{{ widget.title }}</h4>
+            </div>
+            <!-- Placeholder for widget content -->
+            <div class="widget-content">
+              <router-outlet [name]="widget.title.toLowerCase()"></router-outlet>
+               
+              </div>
+              
+            </div>
+           
+          </div>
+           
+          </ng-container>
+         
+        </ng-container>
+        <div *ngIf="showFilter" >
+           <app-data-filter  (filterChange)="onfilterchange($event)"></app-data-filter> 
+        </div>
+      </div>
+   
+    </section>
+   
+  </div>
+</div>

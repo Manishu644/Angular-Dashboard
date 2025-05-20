@@ -1,0 +1,28 @@
+<div class="widget-config">
+    <h3 class="widget-config-title">Configure Chart</h3>
+    
+    <form [formGroup]="widgetConfigForm" class="widget-config-form">
+      
+      <!-- Chart Type -->
+      <div class="form-group">
+        <label for="chart-type">Chart Type:</label>
+        <select id="chart-type" formControlName="chartType">
+          <option *ngFor="let type of chartTypes" [value]="type">{{ type }}</option>
+        </select>
+      </div>
+  
+      <!-- Data Range -->
+      <div class="form-group">
+        <label for="data-range">Data Range:</label>
+        <select id="data-range" formControlName="dataRange">
+          <option *ngFor="let range of dataRanges" [value]="range">{{ range }}</option>
+        </select>
+      </div>
+  
+      <div class="widget-config-actions">
+        <button type="submit" [disabled]="widgetConfigForm.invalid" class="apply-btn">Apply</button>
+        <button type="button" (click)="clearWidgetConfig()" class="clear-btn">Clear</button> 
+      </div>
+    </form>
+  </div>
+  
