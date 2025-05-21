@@ -48,8 +48,7 @@ this.router.navigate([
       outlets: {
         sales: ['sales'],
         useractivity: ['useractivity'],
-        traffic: ['traffic'],
-        filter:['filter']
+        traffic: ['traffic']
       }
     }
   ]);

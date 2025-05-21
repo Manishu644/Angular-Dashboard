@@ -11,7 +11,6 @@ export const routes: Routes = [
             {path:'sales', component : SalesChartComponent,outlet:'sales'},
             {path:'useractivity',component : UserActivityListComponent,outlet:'useractivity'},
             {path:'traffic', component : TrafficSummaryComponent,outlet:'traffic'},
-            {path:'filter',component:DataFilterComponent,outlet:'filter'}
         ],
         
     },
