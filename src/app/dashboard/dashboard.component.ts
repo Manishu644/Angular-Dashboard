@@ -1,14 +1,8 @@
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { RouterLink, RouterOutlet,Router } from '@angular/router';
-import { SalesChartComponent } from '../sales-chart/sales-chart.component';
-import { UserActivityListComponent } from '../user-activity-list/user-activity-list.component';
-import { TrafficSummaryComponent } from '../traffic-summary/traffic-summary.component';
+import {  RouterOutlet,Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { DataService } from '../data.service';
 import { DashboardStateService } from '../dashboard-state.service';
-import { WidgetConfigComponent } from '../widget-config/widget-config.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataFilterComponent } from '../data-filter/data-filter.component';
 
