@@ -102,7 +102,7 @@ export class DataService {
     return interval(1000).pipe(
       map(() => {
         const now = new Date();
-        return this.regions.flatMap(region => {
+        return this.regions.map(region => {
           const daysAgo1 = Math.floor(Math.random() * 30);
          
           const date1 = new Date(now);
@@ -110,14 +110,13 @@ export class DataService {
           date1.setDate(now.getDate() - daysAgo1);
           
   
-          return [
-            {
+          return{
               region,
               date: date1.toISOString(),
               traffic: Math.floor(Math.random() * 3000)
-             },
+             };
            
-          ];
+        
         });
       }),
       shareReplay(1)
