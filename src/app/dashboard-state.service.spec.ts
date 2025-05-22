@@ -49,7 +49,7 @@ describe('DashboardStateService', () => {
     expect(service.isWidgetVisible('traffic')).toBeFalse();
   });
 
-  it('should check if a widget is visible', () => {
+  it('should check if a widget is visible', () =>{
     service.switchUser('guest');
     expect(service.isWidgetVisible('sales')).toBeTrue();
     expect(service.isWidgetVisible('useractivity')).toBeFalse();
@@ -151,6 +151,33 @@ it('should load state from localStorage if present', (done) => {
       done();
     });
   });
+
+  it('should return default state if localStorage is empty', () => {
+  localStorage.removeItem('dashboardState'); // Make sure it's empty
+
+  const service = TestBed.inject(DashboardStateService);
+  const state = (service as any).loadStateFromLocalStorage();
+  expect(state).toBeNull();
+  });
+
+  it('should return false for unknown widget in isWidgetVisible()', () => {
+  service.switchUser('guest');
+  expect(service.isWidgetVisible('nonexistentWidget')).toBeFalse();
+  });
+
+  it('should fallback to default widgetVisibility if user profile is missing', (done) => {
+  service.switchUser('unknownUser');
+
+  service.state$.subscribe(state => {
+    expect(state.currentUser).toBe('unknownUser');
+    expect(state.widgetVisibility).toEqual(service['defaultState'].widgetVisibility);
+    done();
+  });
+});
+
+
+
+
 
 
 });

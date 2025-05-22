@@ -44,7 +44,6 @@ const mockRoutes: Routes = [
   { path: 'sales', component: SalesChartComponent },
   { path: 'useractivity', component: UserActivityListComponent },
   { path: 'traffic', component: TrafficSummaryComponent },
-  { path: 'filter', component: DataFilterComponent }
 ];
 
 beforeEach(async () => {
@@ -136,9 +135,9 @@ beforeEach(async () => {
   const initial = component.showFilter;
   component.toggleFilterConfig();
   expect(component.showFilter).toBe(!initial);
- });
-
- it('should update widget order and call setWidgetOrder on drag-and-drop', () => {
+  });
+  
+  it('should update widget order and call setWidgetOrder on drag-and-drop', () => {
   const event = {
     previousIndex: 0,
     currentIndex: 1
@@ -149,9 +148,9 @@ beforeEach(async () => {
 
   expect(mockDashboardStateService.setWidgetOrder).toHaveBeenCalledWith('admin', component.widgets);
   expect(component.widgets[0]).toEqual(originalWidgets[1]);
-});
+  });
 
-it('should not call setWidgetOrder if drag index does not change', () => {
+  it('should not call setWidgetOrder if drag index does not change', () => {
   const event = { previousIndex: 1, currentIndex: 1 } as any;
 
   component.onDrop(event);
